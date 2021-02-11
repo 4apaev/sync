@@ -1,0 +1,26 @@
+{
+  "name": "sync",
+  "author": "Michael Miretsky",
+  "version": "1.0.0",
+  "license": "ISC",
+  "description": "http util",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:4apaev/sync.git"
+  },
+  "scripts": {
+    "test": "mocha",
+    "debug": "NODE_DEBUG=Sync.Node mocha",
+    "lint": "eslint --fix src",
+    "cover": "npx c8 --check-coverage npm run test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.25",
+    "c8": "^7.5.0",
+    "eslint": "^7.19.0",
+    "mocha": "^8.2.1"
+  }
+}

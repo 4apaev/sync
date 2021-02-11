@@ -1,0 +1,30 @@
+{
+  "lines": 90,
+  "branches": 90,
+  "functions": 90,
+  "statements": 90,
+
+  "reporter": [
+    "text",
+    "lcov"
+  ],
+
+  "include": [
+    "src/**"
+  ],
+
+  "exclude": [
+    "test/**",
+    "coverage/**",
+    "src/server/**",
+    "src/util/mim.js",
+    "src/util/expect.js",
+    "src/util/test-util.js",
+    "src/Fetch.js"
+  ],
+
+  "clean": true,
+  "per-file": true,
+  "check-coverage": true,
+  "temp-directory": ".c8_temp"
+}

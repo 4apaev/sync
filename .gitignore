@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+.c8_temp
+node_modules
+coverage
+.vscode
+.history

@@ -1,4 +1,4 @@
-import Mim from './util/mim.js'
+import Mim from './Mim.js'
 
 export default class Head extends Map {
   constructor(o) {

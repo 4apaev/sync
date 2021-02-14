@@ -2,7 +2,7 @@ import assert from 'assert'
 import { Readable } from 'stream'
 
 import Sync from '../src/Sync.js'
-import Server from '../src/util/test-util.js'
+import Server from '../scripts/test-util.js'
 
 const PORT = 7654
 const URL = `http://localhost:${ PORT }`
@@ -175,7 +175,7 @@ describe('Sync', () => {
       yield 'a'
     })())
 
-    const re = await Sync.post().send(readable)
+    const re = await Sync.post('/', readable)
     assert.strictEqual(re.code, 200)
     assert.strictEqual(re.body.body, 'shoshana')
   })

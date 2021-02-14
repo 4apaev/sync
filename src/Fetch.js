@@ -1,5 +1,5 @@
 import Base from './Base.js'
-import Mim from './util/mim.js'
+import Mim from './Mim.js'
 
 export default class Fetch extends Base {
   /**

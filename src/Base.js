@@ -1,4 +1,4 @@
-import Mim from './util/mim.js'
+import Mim from './Mim.js'
 
 export default class Base {
   static HEADERS = { __proto__: null }

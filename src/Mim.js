@@ -27,9 +27,15 @@ export default {
   },
 
   ext(x) {
-    return typeof x === 'string'
-      ? mims[ x.split('.').pop() ] || mims.txt
-      : mims.txt
+    return mims[ x.split('.').pop() ] || mims.txt
+  },
+
+  isit(x, head) {
+    let ct = 'string' === typeof head
+      ? head
+      : head?.get?.('content-type') || head[ 'content-type' ]
+
+    return (ct ?? '').toLowerCase().includes(mims[ x ] ?? x)
   },
 
   is(x, head) {

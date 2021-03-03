@@ -17,8 +17,6 @@
     "mocha": "mocha"
   },
   "devDependencies": {
-    "@types/mocha": "^8.2.1",
-    "@types/node": "^14.14.31",
     "c8": "^7.6.0",
     "eslint": "^7.21.0",
     "mocha": "^8.3.0"

@@ -8,11 +8,6 @@ export const mims = {
   json : 'application/json',
   form : 'multipart/form-data',
   query: 'application/x-www-form-urlencoded',
-  bdf: 'application/x-font-bdf',
-  otf: 'application/x-font-otf',
-  ttf: 'application/x-font-ttf',
-  woff: 'application/font-woff',
-  woff2: 'application/font-woff2',
   gif: 'image/gif',
   jpg: 'image/jpeg',
   png: 'image/png',
@@ -30,23 +25,8 @@ export default {
     return mims[ x.split('.').pop() ] || mims.txt
   },
 
-  isit(x, head) {
-    let ct = 'string' === typeof head
-      ? head
-      : head?.get?.('content-type') || head[ 'content-type' ]
-
-    return (ct ?? '').toLowerCase().includes(mims[ x ] ?? x)
-  },
-
   is(x, head) {
-    if (!x || !head)
-      return false
-
-    const ct = 'string' === typeof head
-      ? head
-      : head.get
-        ? head.get('content-type')
-        : head[ 'content-type' ]
-    return !!ct && ct.toLowerCase().includes(mims[ x ] || x)
-  }
+    const ct = 'string' === typeof head ? head : head?.get?.('content-type') ?? head?.[ 'content-type' ] ?? ''
+    return ct.toLowerCase().includes(mims[ x ] ?? x)
+  },
 }

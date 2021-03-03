@@ -3,7 +3,22 @@ import {
   deepStrictEqual,
 } from 'assert'
 
+import Mim from '../src/Mim.js'
 import Head from '../src/Head.js'
+
+describe('Mim', () => {
+  it('get', () => {
+    strictEqual(Mim.get('css'), 'text/css')
+    strictEqual(Mim.get('js'), 'application/javascript')
+    strictEqual(Mim.get('yml'), 'yml')
+  })
+
+  it('ext', () => {
+    strictEqual(Mim.ext('style.css'), 'text/css')
+    strictEqual(Mim.ext('script.js'), 'application/javascript')
+    strictEqual(Mim.ext('config.yml'), 'text/plain')
+  })
+})
 
 describe('Head', () => {
   const ct = 'content-type'

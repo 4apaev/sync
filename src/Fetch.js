@@ -3,10 +3,10 @@ import Mim from './Mim.js'
 
 export default class Fetch extends Base {
   /**
-   * @param {string} url
-   * @param {any=} body
-   * @param {string} method
-   * @param {Headers} headers
+   * @property {string} url
+   * @property {any=} body
+   * @property {string} method
+   * @property {Headers} headers
    * @return {Promise<Response>}
    */
   end({ url, body, method, headers }) {

@@ -1,12 +1,14 @@
+// @ts-check
 import Base from './Base.js'
 import Mim from './Mim.js'
 
+
 export default class Fetch extends Base {
   /**
-   * @property {string} url
-   * @property {any=} body
-   * @property {string} method
-   * @property {Headers} headers
+   * @prop {string | URL} url
+   * @prop {string} method
+   * @prop {Headers | Object<string, string>} headers
+   * @prop {*} [body]
    * @return {Promise<Response>}
    */
   end({ url, body, method, headers }) {
@@ -15,7 +17,7 @@ export default class Fetch extends Base {
 
   /**
    * @param {Response} re
-   * @return {Promise<{headers: Headers, code: number, ok: boolean, error: null, body: null}|Promise<never>>}
+   * @return {Promise<import('./Base.js').Payload>}
    */
   async parse(re) {
     const payload = {
@@ -36,6 +38,5 @@ export default class Fetch extends Base {
       ? payload
       : Promise.reject(payload)
   }
-
 }
 

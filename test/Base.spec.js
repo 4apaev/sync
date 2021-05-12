@@ -53,13 +53,13 @@ describe('Base', () => {
       const rq = Base.put()
       rq.send(true)
       assert.strictEqual(rq.body, 'true')
-      assert.strictEqual(rq.get('content-length'), 4)
+      assert.strictEqual(rq.get('content-length'), '4')
       rq.send(123)
       assert.strictEqual(rq.body, '123')
-      assert.strictEqual(rq.get('content-length'), 3)
+      assert.strictEqual(rq.get('content-length'), '3')
       rq.send()
       assert.strictEqual(rq.body, '123')
-      assert.strictEqual(rq.get('content-length'), 3)
+      assert.strictEqual(rq.get('content-length'), '3')
     })
 
     it('should set body and update content-type', () => {
@@ -67,7 +67,7 @@ describe('Base', () => {
       rq.send({ a: 1 })
       assert.strictEqual(rq.body, '{"a":1}')
       assert.strictEqual(rq.type(), 'application/json')
-      assert.strictEqual(rq.get('content-length'), 7)
+      assert.strictEqual(rq.get('content-length'), '7')
     })
 
     it('should not update content-type if exist', () => {
@@ -76,7 +76,7 @@ describe('Base', () => {
       rq.send({ a: 1 })
       assert.strictEqual(rq.body, '{"a":1}')
       assert.strictEqual(rq.type(), 'application/xml')
-      assert.strictEqual(rq.get('content-length'), 7)
+      assert.strictEqual(rq.get('content-length'), '7')
     })
   })
 

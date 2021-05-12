@@ -51,7 +51,7 @@ export default class Sync extends Base {
       body.push(Buffer.from(chunk))
     body = Buffer.concat(body).toString()
 
-    if (headers.isJSON()) {
+    if (headers.isJSON() && body.length) {
       try {
         body = JSON.parse(body)
       } catch (e) {

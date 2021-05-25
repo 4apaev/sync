@@ -27,6 +27,15 @@ export default class Base {
   // @ts-ignore
   headers = { ...this.constructor.HEADERS }
 
+  /** @alias headers */
+  get head() {
+    return this.headers
+  }
+
+  /** @alias headers */
+  get header() {
+    return this.headers
+  }
 
   /**
    * @param {string} [method='GET']

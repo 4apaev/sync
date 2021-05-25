@@ -7,14 +7,14 @@ import Mim from './Mim.js'
  * @prop {boolean} ok
  * @prop {Error | null} error
  * @prop {Headers | Object<string, string>} headers
- * @prop {*} [body]
+ * @prop {string | import('stream')} [body]
  */
 
 export default class Base {
   /** @type {Object<string, string>} */
   static HEADERS = { __proto__: null }
 
-  /** @type {string | URL} */
+  /** @type {string} */
   static BASE_URL = 'http://localhost:3000'
 
   /** @type {string | *[]} */
@@ -24,6 +24,7 @@ export default class Base {
   method = 'GET'
 
   /** @type {Object<string, string>} */
+  // @ts-ignore
   headers = { ...this.constructor.HEADERS }
 
 
@@ -35,6 +36,7 @@ export default class Base {
     if (method) {
       this.method = method.toUpperCase()
     }
+    //@ts-ignore
     this.url = this.constructor.resolveUrl(url)
   }
 
@@ -55,6 +57,7 @@ export default class Base {
   /**
    * @param {string} key
    * @param {string} val
+   * @returns {Base}
    */
   set(key, val) {
     if (typeof key == 'object')
@@ -66,6 +69,7 @@ export default class Base {
 
   /**
    * @param {string} [alias]
+   * @returns {Base|string}
    */
   type(alias) {
     return alias
@@ -74,7 +78,8 @@ export default class Base {
   }
 
   /**
-   * @param {any} body
+   * @param {*} body
+   * @returns {Base}
    */
   send(body) {
     if (body == null)
@@ -89,8 +94,9 @@ export default class Base {
   }
 
   /**
-   * @param {{ [s: string]: any; } | ArrayLike<any>} key
+   * @param {string | Object.<string, string>} key
    * @param {string} [val]
+   * @returns {Base}
    */
   query(key, val) {
     if (!key)
@@ -127,7 +133,7 @@ export default class Base {
         ? new URL(url)
         : new URL(url, this.BASE_URL)
       : url instanceof URL
-        ? url
+        ? url // @ts-ignore
         : new URL(this.BASE_URL)
   }
 

@@ -4,6 +4,8 @@ import Mim from './Mim.js'
 
 
 export default class Fetch extends Base {
+  static BASE_URL = location.origin
+
   /**
    * @prop {string | URL} url
    * @prop {string} method

@@ -94,7 +94,7 @@ export default class Base {
     if (body == null)
       return this
     if (typeof body == 'object') {
-      this.type() || this.type('json')
+      this.headers[ 'content-type' ] ||= 'application/json'
       this.body = JSON.stringify(body)
     }
     else

@@ -111,8 +111,8 @@ export default class Base {
     if (!key)
       return this
     if (val == null && typeof key == 'object')
-      Object.entries(key).forEach(([ k, v ]) =>
-        this.url.searchParams.set(k, v))
+      for (const [ k, v ] of Object.entries(key))
+        this.url.searchParams.set(k, v)
     else
       this.url.searchParams.set(String(key), val)
     return this

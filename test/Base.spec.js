@@ -6,7 +6,7 @@ describe('Base', () => {
 
   describe('Base.resolveUrl', () => {
     it('should set default method', () => {
-      assert.strictEqual(new Base().method, 'GET')
+      assert.strictEqual((new Base).method, 'GET')
       assert.strictEqual(new Base('PUT').method, 'PUT')
       assert.strictEqual(Base.post().method, 'POST')
       assert.strictEqual(Base.del().method, 'DELETE')
@@ -34,7 +34,12 @@ describe('Base', () => {
 
   describe('Base.headers', () => {
     it('should set headers as object and key/value', () => {
-      assert.deepStrictEqual(Base.put().set('a', 'b').set({ c: 'd' }).headers, { a: 'b', c: 'd' })
+      const check = { a: 'b', c: 'd' }
+      const ctx = Base.put().set('a', 'b').set({ c: 'd' })
+
+      assert.deepStrictEqual(ctx.head, check)
+      assert.deepStrictEqual(ctx.header, check)
+      assert.deepStrictEqual(ctx.headers, check)
     })
 
     it('should get header', () => {
@@ -53,13 +58,13 @@ describe('Base', () => {
       const rq = Base.put()
       rq.send(true)
       assert.strictEqual(rq.body, 'true')
-      assert.strictEqual(rq.get('content-length'), 4)
+      assert.strictEqual(rq.get('content-length'), '4')
       rq.send(123)
       assert.strictEqual(rq.body, '123')
-      assert.strictEqual(rq.get('content-length'), 3)
+      assert.strictEqual(rq.get('content-length'), '3')
       rq.send()
       assert.strictEqual(rq.body, '123')
-      assert.strictEqual(rq.get('content-length'), 3)
+      assert.strictEqual(rq.get('content-length'), '3')
     })
 
     it('should set body and update content-type', () => {
@@ -67,7 +72,7 @@ describe('Base', () => {
       rq.send({ a: 1 })
       assert.strictEqual(rq.body, '{"a":1}')
       assert.strictEqual(rq.type(), 'application/json')
-      assert.strictEqual(rq.get('content-length'), 7)
+      assert.strictEqual(rq.get('content-length'), '7')
     })
 
     it('should not update content-type if exist', () => {
@@ -76,7 +81,7 @@ describe('Base', () => {
       rq.send({ a: 1 })
       assert.strictEqual(rq.body, '{"a":1}')
       assert.strictEqual(rq.type(), 'application/xml')
-      assert.strictEqual(rq.get('content-length'), 7)
+      assert.strictEqual(rq.get('content-length'), '7')
     })
   })
 

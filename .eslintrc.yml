@@ -1,39 +1,8 @@
 env:
-  es6: true
   node: true
+  mocha: true
   browser: true
+  es2021: true
 
 extends:
-  - 'eslint:recommended'
-
-parserOptions:
-  sourceType: module
-  ecmaVersion: 2020
-
-rules:
-  indent:
-    - 2
-    - 2
-  quotes:
-    - 2
-    - single
-
-  template-curly-spacing:
-    - 2
-    - always
-
-  computed-property-spacing:
-    - 2
-    - always
-
-  object-curly-spacing:
-    - 2
-    - always
-    - arraysInObjects: false
-      objectsInObjects: false
-
-  array-bracket-spacing:
-    - 2
-    - always
-    - arraysInArrays: false
-      objectsInArrays: false
+  - '../.eslintrc.yml'

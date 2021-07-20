@@ -6,7 +6,7 @@ describe('Base', () => {
 
   describe('Base.resolveUrl', () => {
     it('should set default method', () => {
-      assert.strictEqual(new Base().method, 'GET')
+      assert.strictEqual((new Base).method, 'GET')
       assert.strictEqual(new Base('PUT').method, 'PUT')
       assert.strictEqual(Base.post().method, 'POST')
       assert.strictEqual(Base.del().method, 'DELETE')
@@ -34,7 +34,12 @@ describe('Base', () => {
 
   describe('Base.headers', () => {
     it('should set headers as object and key/value', () => {
-      assert.deepStrictEqual(Base.put().set('a', 'b').set({ c: 'd' }).headers, { a: 'b', c: 'd' })
+      const check = { a: 'b', c: 'd' }
+      const ctx = Base.put().set('a', 'b').set({ c: 'd' })
+
+      assert.deepStrictEqual(ctx.head, check)
+      assert.deepStrictEqual(ctx.header, check)
+      assert.deepStrictEqual(ctx.headers, check)
     })
 
     it('should get header', () => {

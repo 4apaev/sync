@@ -1,7 +1,8 @@
 // @ts-check
 import Base from './Base.js'
-import Mim from './Mim.js'
-
+import Mim, {
+  mims,
+} from './Mim.js'
 
 export default class Fetch extends Base {
   static BASE_URL = location.origin
@@ -33,12 +34,42 @@ export default class Fetch extends Base {
       payload.body = Mim.is('json', re.headers)
         ? await re.json()
         : await re.text()
-    } catch (e) {
+    }
+    catch (e) {
       payload.error = e
     }
     return re.ok
       ? payload
       : Promise.reject(payload)
+  }
+
+  /**
+   * @param {string} url
+   */
+  jsonp(url) {
+    return new Promise((done, fail) => {
+      const id = 'jsonp-' + Math.random().toString(32).slice(2)
+      // const rq = Fetch.get(url, { callback: id })
+      const scr = document.createElement('script')
+      const headers = new Headers([[ 'content-type', mims.js ]])
+
+      const clear = (fn, payload) => {
+        scr.onerror = null,
+        delete globalThis[ id ]
+        document.head.removeChild(scr)
+        fn(payload)
+      }
+
+      globalThis[ id ] = body =>
+        clear(done, { ok: true, code: 200, headers, error: null, body })
+
+      scr.onerror = e =>
+        clear(fail, { ok: false, code: 404, headers, error: e, body: null })
+
+      scr.id = id
+      scr.src = url
+      document.head.appendChild(scr)
+    })
   }
 }
 

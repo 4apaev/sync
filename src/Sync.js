@@ -21,9 +21,10 @@ export default class Sync extends Base {
     if (typeof body == 'object') {
       this.body = format('%j', body)
       this.headers[ 'content-type' ] ||= 'application/json'
-    } else {
-      this.body = format('%s', body)
     }
+    else
+      this.body = format('%s', body)
+
     return this.set('content-length', Buffer.byteLength(this.body))
   }
 
@@ -54,7 +55,8 @@ export default class Sync extends Base {
     if (headers.isJSON() && body.length) {
       try {
         body = JSON.parse(body)
-      } catch (e) {
+      }
+      catch (e) {
         error = e
         debug('Fail to parse %s', e.message)
       }

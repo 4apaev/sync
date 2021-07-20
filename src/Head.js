@@ -2,6 +2,7 @@
 import Mim from './Mim.js'
 
 export default class Head extends Map {
+
   /**
    * @param {Object<string, string>} [o]
    */
@@ -20,9 +21,10 @@ export default class Head extends Map {
   set(k, v) {
     if (typeof k == 'string')
       super.set(k, v)
-    else if (v == null && typeof k == 'object')
+    else if (v == null && typeof k == 'object') {
       for (const [ a, b ] of Object.entries(k))
         super.set(a, b)
+    }
     return this
   }
 

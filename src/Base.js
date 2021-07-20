@@ -11,6 +11,7 @@ import Mim from './Mim.js'
  */
 
 export default class Base {
+
   /** @type {Object<string, string>} */
   static HEADERS = { __proto__: null }
 
@@ -42,9 +43,9 @@ export default class Base {
    * @param {string | URL} [url]
    */
   constructor(method, url) {
-    if (method) {
+    if (method)
       this.method = method.toUpperCase()
-    }
+
     //@ts-ignore
     this.url = this.constructor.resolveUrl(url)
   }
@@ -110,9 +111,10 @@ export default class Base {
   query(key, val) {
     if (!key)
       return this
-    if (val == null && typeof key == 'object')
+    if (val == null && typeof key == 'object') {
       for (const [ k, v ] of Object.entries(key))
         this.url.searchParams.set(k, v)
+    }
     else
       this.url.searchParams.set(String(key), val)
     return this

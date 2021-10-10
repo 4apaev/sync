@@ -28,7 +28,7 @@ export default {
   },
 
   is(x, head) {
-    const ct = 'string' === typeof head
+    const ct = typeof head == 'string'
       ? head
       : head?.get?.('content-type') ?? head?.[ 'content-type' ] ?? ''
     return ct.toLowerCase().includes(mims[ x ] ?? x)
